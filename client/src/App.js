@@ -1,13 +1,21 @@
+// import react and useeffect hooks
 import React, { useState, useEffect } from 'react';
+// import container and appBar
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
+// to dispatch action
 import { useDispatch } from 'react-redux';
 
+// impost post component and form component
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
+// import get post action to dispatch
 import { getPosts } from './actions/posts';
+// import styles and 
 import useStyles from './styles';
+// import images file
 import memories from './images/memories.png';
 
+// functional component
 const App = () => {
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();

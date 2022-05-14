@@ -1,16 +1,23 @@
+// import express from express
 import express from 'express';
+// import mongoose
 import mongoose from 'mongoose';
 
+// import postMessage from postMessage
 import PostMessage from '../models/postMessage.js';
 
 const router = express.Router();
 
+// export getpost function for getting all post
 export const getPosts = async (req, res) => { 
     try {
+        // Go to the database and get all post
         const postMessages = await PostMessage.find();
-                
+        
+        // Send the post response
         res.status(200).json(postMessages);
     } catch (error) {
+        // if error send the error as json
         res.status(404).json({ message: error.message });
     }
 }
@@ -27,21 +34,29 @@ export const getPost = async (req, res) => {
     }
 }
 
+// export createpost function for creating post
 export const createPost = async (req, res) => {
+    // receive set of data from the client
     const { title, message, selectedFile, creator, tags } = req.body;
 
+    // send the data to model
     const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
 
     try {
+        // save the data to the database
         await newPostMessage.save();
 
+        // send the response back to the client
         res.status(201).json(newPostMessage );
     } catch (error) {
+        // if error send error
         res.status(409).json({ message: error.message });
     }
 }
 
+// exporting updatepost function
 export const updatePost = async (req, res) => {
+    // get the id
     const { id } = req.params;
     const { title, message, creator, selectedFile, tags } = req.body;
     

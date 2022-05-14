@@ -15,7 +15,11 @@ New major projects coming soon, subscribe to the mailing list to stay up to date
 Setup:
 - run ```npm i && npm start``` for both client and server side to start the app
 
-PART 1
+PART 1 (SERVER SETUP)
 First: setup server
-second: add routes file and controller file ()
-Third: create model
+second: add routes file()
+Third: create model( controller,)
+Fourth: controller()
+
+PART 2 ( CLIENT SETUP)
+first: App.js( index.js)
