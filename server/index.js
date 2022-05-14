@@ -10,6 +10,7 @@ import postRoutes from './routes/posts.js';
 
 // initialize app and 
 const app = express();
+// dotenv.conig();
 
 // MIDDLEWARE
 // set up body parser for recieving json data and data from form

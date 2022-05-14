@@ -24,6 +24,7 @@ const Post = ({ post, setCurrentId }) => {
         <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="default" /></Button>
       </div>
       <div className={classes.details}>
+        {/* map each tags */}
         <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
       </div>
       <Typography className={classes.title} gutterBottom variant="h5" component="h2">{post.title}</Typography>
@@ -31,6 +32,7 @@ const Post = ({ post, setCurrentId }) => {
         <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
+        {/* DELETE AND LIKE POST */}
         <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}><ThumbUpAltIcon fontSize="small" /> Like {post.likeCount} </Button>
         <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}><DeleteIcon fontSize="small" /> Delete</Button>
       </CardActions>

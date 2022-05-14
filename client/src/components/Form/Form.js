@@ -8,10 +8,12 @@ import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+  // get the state and find the post that the data is the same with the current id
   const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
 
+  // if post then setpost data and it then changed the values
   useEffect(() => {
     if (post) setPostData(post);
   }, [post]);
@@ -24,10 +26,12 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // if if current id is not null dispatch update post
     if (currentId === 0) {
       dispatch(createPost(postData));
       clear();
     } else {
+      // dispatch create post
       dispatch(updatePost(currentId, postData));
       clear();
     }

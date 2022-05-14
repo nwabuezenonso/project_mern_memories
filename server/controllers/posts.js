@@ -60,34 +60,47 @@ export const updatePost = async (req, res) => {
     const { id } = req.params;
     const { title, message, creator, selectedFile, tags } = req.body;
     
+    //  check if the mongoose id is a valid one
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
+    // then update post
     const updatedPost = { creator, title, message, tags, selectedFile, _id: id };
-
     await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
 
+    // send response
     res.json(updatedPost);
 }
 
+// deletepost function
 export const deletePost = async (req, res) => {
+    // recieve the id
     const { id } = req.params;
 
+    // check if it is a valid id
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
+    // delete the post
     await PostMessage.findByIdAndRemove(id);
 
+    // send a response message
     res.json({ message: "Post deleted successfully." });
 }
 
+// functional component to like post
 export const likePost = async (req, res) => {
+    // get the params from the string
     const { id } = req.params;
 
+    // check if the id is a valid mogodb id
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
     
+    // find the post by id
     const post = await PostMessage.findById(id);
 
+    // add the data for user to like the post
     const updatedPost = await PostMessage.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
     
+    //  return updated data
     res.json(updatedPost);
 }
 
