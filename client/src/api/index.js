@@ -1,7 +1,10 @@
+// import axios for https request
 import axios from 'axios';
 
+// create connection url
 const url = 'http://localhost:5000/posts';
 
+// export api methods to get pos and perfomr some other function
 export const fetchPosts = () => axios.get(url);
 export const createPost = (newPost) => axios.post(url, newPost);
 export const likePost = (id) => axios.patch(`${url}/${id}/likePost`);

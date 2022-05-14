@@ -16,10 +16,18 @@ Setup:
 - run ```npm i && npm start``` for both client and server side to start the app
 
 PART 1 (SERVER SETUP)
-First: setup server
-second: add routes file()
-Third: create model( controller,)
+First:  index file
+second:  routes file()
+Third:  model export ( controller,)
 Fourth: controller()
 
 PART 2 ( CLIENT SETUP)
 first: App.js( index.js)
+second: api file( actions)
+third: actions file ()
+fourth: reducers file
+
+### App runtime
+app.js component runs both the post and the form component
+
+GETPOST =>  dispatch(getPosts) => go to getPost action file => dispatch =>  reducer file => useselector to get data in post

@@ -6,6 +6,7 @@ import Post from './Post/Post';
 import useStyles from './styles';
 
 const Posts = ({ setCurrentId }) => {
+  // coming from the reducer index.js file
   const posts = useSelector((state) => state.posts);
   const classes = useStyles();
 

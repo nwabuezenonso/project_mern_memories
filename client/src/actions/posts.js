@@ -1,7 +1,10 @@
+// import action types
 import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
+// import api
 import * as api from '../api/index.js';
 
+// export function
 export const getPosts = () => async (dispatch) => {
   try {
     const { data } = await api.fetchPosts();
