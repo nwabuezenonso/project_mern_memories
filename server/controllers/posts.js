@@ -30,6 +30,7 @@ export const getPost = async (req, res) => {
 export const createPost = async (req, res) => {
     const post = req.body;
 
+    // add a new set of data called creator to th new post from the middleware
     const newPostMessage = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() })
 
     try {
@@ -71,12 +72,16 @@ export const likePost = async (req, res) => {
         return res.json({ message: "Unauthenticated" });
       }
 
+    //   check if the id is a valid mongodb id
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
     
+    // find the id
     const post = await PostMessage.findById(id);
 
+    //  find the index of the data
     const index = post.likes.findIndex((id) => id ===String(req.userId));
 
+    
     if (index === -1) {
       post.likes.push(req.userId);
     } else {

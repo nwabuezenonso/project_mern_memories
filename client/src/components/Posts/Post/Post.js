@@ -1,3 +1,4 @@
+// import component from react and material UI
 import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core/';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
@@ -13,10 +14,13 @@ import useStyles from './styles';
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  // get item from the local storage
   const user = JSON.parse(localStorage.getItem('profile'));
 
+  // function for analyzing likes
   const Likes = () => {
     if (post.likes.length > 0) {
+      // check if the like array contain the id of the person
       return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
         ? (
           <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
@@ -35,6 +39,8 @@ const Post = ({ post, setCurrentId }) => {
         <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
       </div>
+      {/* if user id = post. creator id then true */}
+      {/* localstorageID = decoded token ID */}
       {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
       <div className={classes.overlay2}>
         <Button onClick={() => setCurrentId(post._id)} style={{ color: 'white' }} size="small">
