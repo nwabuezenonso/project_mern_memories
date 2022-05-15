@@ -6,29 +6,34 @@ import PostMessage from '../models/postMessage.js';
 const router = express.Router();
 
 export const getPosts = async (req, res) => {
-    const { page } = req.query;
-    
+    const { page } = req.query;     // get the query of the page
+
     try {
-        const LIMIT = 8;
+        const LIMIT = 8;         // get the limit of the page variable
         const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
     
-        const total = await PostMessage.countDocuments({});
-        const posts = await PostMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
+        const total = await PostMessage.countDocuments({});  // method to count all document
+        const posts = await PostMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex); // find post from newest to oldest and pass the limit and skip to start index
 
-        res.json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
+        res.json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});  //pass in data, current page and total number of pages
     } catch (error) {    
         res.status(404).json({ message: error.message });
     }
 }
 
+// get post by search function
 export const getPostsBySearch = async (req, res) => {
+    // retrieve the query
     const { searchQuery, tags } = req.query;
 
     try {
+        // convert to regular expression for mongodb to get data easily  i stand for ignore case
         const title = new RegExp(searchQuery, "i");
 
+        // find the data by tags or title
         const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});
 
+        // send data as response
         res.json({ data: posts });
     } catch (error) {    
         res.status(404).json({ message: error.message });
@@ -36,12 +41,12 @@ export const getPostsBySearch = async (req, res) => {
 }
 
 export const getPost = async (req, res) => { 
-    const { id } = req.params;
+    const { id } = req.params; // get the post by id
 
     try {
-        const post = await PostMessage.findById(id);
+        const post = await PostMessage.findById(id); // find the post by id
         
-        res.status(200).json(post);
+        res.status(200).json(post); //send the response
     } catch (error) {
         res.status(404).json({ message: error.message });
     }

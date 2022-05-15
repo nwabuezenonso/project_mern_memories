@@ -13,3 +13,13 @@ Setup:
 - run ```npm i && npm start``` for both client and server side to start the app
 
 TODO: rename post message, refactor reducers, add some cool memories, maybe clickable tags, fix update functionality
+
+
+first: Add path to the app.js for search and post details
+SECOND: create component for pagination and post details
+
+GETPOSTBYSEARCH => search => getpostbysearch action =>communicate with the backend (controller) => return data back to user
+
+GETPOST BY PAGINATION=> useeffect => get action =>communicate with the backend (controller) => dispatch all data and loading=> send data back to user
+
+OPEN POST => Post details component
