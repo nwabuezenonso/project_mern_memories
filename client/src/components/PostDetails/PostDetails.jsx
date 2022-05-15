@@ -8,6 +8,7 @@ import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
 const Post = () => {
+  // recieve posts, isloading and post from the redux
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -15,12 +16,12 @@ const Post = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getPost(id));
+    dispatch(getPost(id));   // dispatch an action on load
   }, [id]);
 
   useEffect(() => {
     if (post) {
-      dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));
+      dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') })); // dispatch another action
     }
   }, [post]);
 
@@ -28,15 +29,16 @@ const Post = () => {
 
   const openPost = (_id) => history.push(`/posts/${_id}`);
 
+  // if loading then return a loading component
   if (isLoading) {
     return (
       <Paper elevation={6} className={classes.loadingPaper}>
-        <CircularProgress size="7em" />
+        <CircularProgress size="7em" /> {/*loading the data if loading is true */}
       </Paper>
     );
   }
 
-  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);  // filter the post that is not equal to the id
 
   return (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
@@ -57,11 +59,13 @@ const Post = () => {
           <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
         </div>
       </div>
+      {/* RECOMMENDED POST */}
       {!!recommendedPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">You might also like:</Typography>
           <Divider />
           <div className={classes.recommendedPosts}>
+            {/* map all the recommended post */}
             {recommendedPosts.map(({ title, name, message, likes, selectedFile, _id }) => (
               <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
                 <Typography gutterBottom variant="h6">{title}</Typography>

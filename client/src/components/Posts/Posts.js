@@ -6,6 +6,7 @@ import Post from './Post/Post';
 import useStyles from './styles';
 
 const Posts = ({ setCurrentId }) => {
+  // get post and loading in post
   const { posts, isLoading } = useSelector((state) => state.posts);
   const classes = useStyles();
 

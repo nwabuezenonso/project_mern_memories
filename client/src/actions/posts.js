@@ -3,11 +3,11 @@ import * as api from '../api/index.js';
 
 export const getPost = (id) => async (dispatch) => {
   try {
-    dispatch({ type: START_LOADING });
+    dispatch({ type: START_LOADING }); // dispatch start loading 
 
-    const { data } = await api.fetchPost(id);
+    const { data } = await api.fetchPost(id); 
 
-    dispatch({ type: FETCH_POST, payload: { post: data } });
+    dispatch({ type: FETCH_POST, payload: { post: data } }); // get the data and send the data as payload
   } catch (error) {
     console.log(error);
   }
@@ -27,8 +27,8 @@ export const getPosts = (page) => async (dispatch) => {
 
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   try {
-    dispatch({ type: START_LOADING });
-    const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
+    dispatch({ type: START_LOADING }); //dispatch start loading
+    const { data: { data } } = await api.fetchPostsBySearch(searchQuery); // fetch the post by search query
 
     dispatch({ type: FETCH_BY_SEARCH, payload: { data } });
     dispatch({ type: END_LOADING });
@@ -44,7 +44,7 @@ export const createPost = (post, history) => async (dispatch) => {
 
     dispatch({ type: CREATE, payload: data });
 
-    history.push(`/posts/${data._id}`);
+    history.push(`/posts/${data._id}`); //nvigate to create post data
   } catch (error) {
     console.log(error);
   }

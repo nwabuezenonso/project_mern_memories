@@ -10,6 +10,7 @@ import Auth from './components/Auth/Auth';
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
 
+  // redirect user if there is a user
   return (
     <BrowserRouter>
       <Container maxWidth="xl">

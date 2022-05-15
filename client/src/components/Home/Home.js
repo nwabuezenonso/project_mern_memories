@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Grow, Grid, AppBar, TextField, Button, Paper } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
+// import usehistory and uselocation for routing and location
 import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 
@@ -10,13 +11,15 @@ import Form from '../Form/Form';
 import Pagination from '../Pagination';
 import useStyles from './styles';
 
+// function to implement our url search params and create url
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 const Home = () => {
   const classes = useStyles();
-  const query = useQuery();
-  const page = query.get('page') || 1;
+  // hooks
+  const query = useQuery(); 
+  const page = query.get('page') || 1; // url search params to create new url for page or search query
   const searchQuery = query.get('searchQuery');
 
   const [currentId, setCurrentId] = useState(0);
@@ -26,23 +29,27 @@ const Home = () => {
   const [tags, setTags] = useState([]);
   const history = useHistory();
 
-  const searchPost = () => {
+
+  const searchPost = () => {   // search post function on click
     if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
-      history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
+      history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);       // push us to a certain search
     } else {
       history.push('/');
     }
   };
 
+  // function for keycode press
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
       searchPost();
     }
   };
 
+  // handle chip function
   const handleAddChip = (tag) => setTags([...tags, tag]);
 
+  // handle delete chip
   const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
 
   return (

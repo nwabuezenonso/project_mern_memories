@@ -30,7 +30,7 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
+      dispatch(createPost({ ...postData, name: user?.result?.name }, history)); // pass the history
       clear();
     } else {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));

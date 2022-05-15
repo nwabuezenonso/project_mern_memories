@@ -31,6 +31,7 @@ const Post = ({ post, setCurrentId }) => {
     return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
   };
 
+  // function to open post
   const openPost = (e) => {
     // dispatch(getPost(post._id, history));
 
@@ -39,6 +40,7 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
     <Card className={classes.card} raised elevation={6}>
+      {/* add a button base */}
       <ButtonBase
         component="span"
         name="test"
