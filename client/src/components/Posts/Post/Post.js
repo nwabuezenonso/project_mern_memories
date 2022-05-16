@@ -19,21 +19,23 @@ const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
 
   const userId = user?.result.googleId || user?.result?._id;
-  const hasLikedPost = post?.likes?.find((like) => like === userId);
+  const hasLikedPost = post?.likes?.find((like) => like === userId); // find the like that is equal to the userID likes
 
-  const handleLike = async () => {
+  // handle like function
+  const handleLike = async () => {  
     dispatch(likePost(post._id));
 
+    // for faster like functionality
     if (hasLikedPost) {
-      setLikes(post.likes.filter((id) => id !== userId));
+      setLikes(post.likes.filter((id) => id !== userId));   // take out likes that is not thesame
     } else {
-      setLikes([...post.likes, userId]);
+      setLikes([...post.likes, userId]);  // set likes to be and add user ID
     }
   };
 
   const Likes = () => {
     if (likes.length > 0) {
-      return likes.find((like) => like === userId)
+      return likes.find((like) => like === userId)  // find the like that is equal to user ID
         ? (
           <><ThumbUpAltIcon fontSize="small" />&nbsp;{likes.length > 2 ? `You and ${likes.length - 1} others` : `${likes.length} like${likes.length > 1 ? 's' : ''}` }</>
         ) : (
@@ -87,6 +89,7 @@ const Post = ({ post, setCurrentId }) => {
       </ButtonBase>
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
+          {/* import likes */}
           <Likes />
         </Button>
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (

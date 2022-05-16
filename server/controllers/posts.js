@@ -100,7 +100,7 @@ export const likePost = async (req, res) => {
     if (index === -1) {
       post.likes.push(req.userId);
     } else {
-      post.likes = post.likes.filter((id) => id !== String(req.userId));
+      post.likes = post.likes.filter((id) => id !== String(req.userId)); // filter the likes from the server
     }
 
     const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
@@ -109,16 +109,16 @@ export const likePost = async (req, res) => {
 }
 
 export const commentPost = async (req, res) => {
-    const { id } = req.params;
-    const { value } = req.body;
+    const { id } = req.params; // get the id from the params
+    const { value } = req.body; // get the  value
 
-    const post = await PostMessage.findById(id);
+    const post = await PostMessage.findById(id); // find the id
 
-    post.comments.push(value);
+    post.comments.push(value); // store the value in the post model
 
-    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true }); // create the updated post
 
-    res.json(updatedPost);
+    res.json(updatedPost); // response with updated post
 };
 
-export default router;
+export default router; 
