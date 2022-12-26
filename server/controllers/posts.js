@@ -51,7 +51,6 @@ export const createPost = async (req, res) => {
 
 // exporting updatepost function
 export const updatePost = async (req, res) => {
-  // get the id
   const { id } = req.params;
   const { title, message, creator, selectedFile, tags } = req.body;
 

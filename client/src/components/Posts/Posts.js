@@ -9,6 +9,7 @@ const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.posts); // arguement accepting our entire state and getting just the posts reducer
   const classes = useStyles();
 
+  // if there is no post show an icon
   return !posts.length ? (
     <CircularProgress />
   ) : (
